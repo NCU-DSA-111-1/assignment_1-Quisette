@@ -11,7 +11,7 @@
 int main()
 {
   init();
-  int iterationTime, lossReportinterval;
+  int iterationTime, lossReportInterval;
   
   switch (selectMode())
   {
@@ -19,8 +19,8 @@ int main()
     printf("Please enter the training iteration. (integer)");
     scanf("%d", &iterationTime);
     printf("Please enter the interval to report quadratic loss (integer)");
-    scanf("%d", &lossReportinterval);
-    dlQuadraticLoss(iterationTime, 1000);
+    scanf("%d", &lossReportInterval);
+    dlQuadraticLoss(iterationTime, lossReportInterval);
     break;
   case 2:
     printf("Please enter the training iteration. (integer)");
