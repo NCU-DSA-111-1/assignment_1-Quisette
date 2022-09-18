@@ -1,11 +1,11 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
-#include<string.h>
-#include<math.h>
-#include<time.h>
-#include"genann.h"
-#include"commonFunctions.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
+#include "genann.h"
+#include "commonFunctions.h"
 #define ANN_INPUT_NUM 2
 #define ANN_HIDDEN_LAYERS 1
 #define ANN_NEURONS_PER_LAYER 2
@@ -13,21 +13,21 @@
 #define LOOKUP_SIZE 4096
 double *sampleOutput;
 double **sampleInput;
-// char *string;
 double *trainingResult;
 char *outputBits;
 void init()
 {
   double *lookup;
-  lookup = (double*)calloc(LOOKUP_SIZE, sizeof(double));
+  lookup = (double *)calloc(LOOKUP_SIZE, sizeof(double));
   /* This will make the neural network initialize differently each run. */
   /* If you don't get a good result, try again for a different result. */
   srand(time(0));
 
   /* Input and expected out data for the XOR function. */
-  // double *input = (double*);,malloc(4*2*sizeof(double));
-  sampleOutput = (double*)calloc(4, sizeof(double));
-  sampleInput = (double**)calloc(4, sizeof(double *));
+
+  // allocate memories for sample inputs and outputs.
+  sampleOutput = (double *)calloc(4, sizeof(double));
+  sampleInput = (double **)calloc(4, sizeof(double *));
 
   calloc2dArray(sampleInput, 4, 2);
 
@@ -43,12 +43,8 @@ void init()
   sampleOutput[1] = 1;
   sampleOutput[2] = 1;
   sampleOutput[3] = 0;
-
-  /* New network with 2 inputs,
-   * 1 hidden layer of 2 neurons,
-   * and 1 output. */
 }
-char* getInput()
+char *getInput()
 {
   // string = (char*)calloc(10, sizeof(char));
   printf("Please enter a string. This Program will output the XOR checksum of this string.");
@@ -56,12 +52,12 @@ char* getInput()
   string = (char *)malloc(100);
   // char string ;
   scanf("%s", string);
-  
+
   // string = fgets(string,sizeof(string),stdin);
-  printf("\n%s\n", string);
-  
+  // printf("\n%s\n", string);
+
   // getOutput(string);
-  return(string);
+  return (string);
 
   // free(string);
 }
@@ -80,21 +76,21 @@ void generateAns(char *string)
 }
 void getOutput(char *string)
 {
-  outputBits = calloc(strlen(string)*8, sizeof(char));
+  outputBits = calloc(strlen(string) * 8, sizeof(char));
   for (int i = 0; string[i] != 0; i++)
   {
-    for (int j = 0; j <7; j++)
+    for (int j = 0; j < 7; j++)
     {
       outputBits[i * 8 + j] = ((string[i] & (1 << j)) >> j); // gets each bit of character
     }
-    // printf("\n");
   }
-  // for (int i = 0; i < strlen(string) * 8; i++)
-  // {
-  //   printf("%d", outputBits[i]);
-  //   if (i % 8 == 7)
-  //     printf("\n");
-  // }
+  // displays bits of string
+  for (int i = 0; i < strlen(string) * 8; i++)
+  {
+    printf("%d", outputBits[i]);
+    if (i % 8 == 7)
+      printf("\n");
+  }
 
   generateAns(outputBits);
   getTrainAns(outputBits);
@@ -102,7 +98,7 @@ void getOutput(char *string)
 }
 void dlTrain(int iteration)
 {
-  genann *ann = genann_init( ANN_INPUT_NUM, ANN_HIDDEN_LAYERS, ANN_NEURONS_PER_LAYER, ANN_OUTPUT_NUM );
+  genann *ann = genann_init(ANN_INPUT_NUM, ANN_HIDDEN_LAYERS, ANN_NEURONS_PER_LAYER, ANN_OUTPUT_NUM);
   double quadraticLoss;
 
   /* Train on the four labeled data points many times. */
@@ -113,12 +109,11 @@ void dlTrain(int iteration)
     genann_train(ann, sampleInput[1], sampleOutput + 1, 3);
     genann_train(ann, sampleInput[2], sampleOutput + 2, 3);
     genann_train(ann, sampleInput[3], sampleOutput + 3, 3);
-
   }
 
   /* Run the network and see what it predicts. */
 
-  trainingResult = (double *)calloc(4,sizeof(double));
+  trainingResult = (double *)calloc(4, sizeof(double));
   printf("Training Result: ");
   for (int i = 0; i < 4; i++)
   {
@@ -126,6 +121,7 @@ void dlTrain(int iteration)
     printf("%1.f ", trainingResult[i]);
   }
   printf("\n");
+  printf("If the result is not \"0 1 1 0 \", please consider increase the iteration count or try rerun this program.\n");
   genann_free(ann);
 }
 
@@ -134,7 +130,7 @@ void calloc2dArray(double **array, int row, int col)
   // array = calloc(row, sizeof(double*));
   for (int i = 0; i < row; i++)
   {
-    sampleInput[i] = (double*)calloc(col, sizeof(*(array[i])));
+    sampleInput[i] = (double *)calloc(col, sizeof(*(array[i])));
   }
 }
 void getTrainAns(char *string)
@@ -148,6 +144,7 @@ void getTrainAns(char *string)
   }
   printf("\n DL-Learning: %d", xorChecksum);
 }
+
 bool dlXor(char num1, char num2)
 {
   if (num1 == 0)
@@ -155,19 +152,20 @@ bool dlXor(char num1, char num2)
   else
     return (num2 == 0 ? trainingResult[2] : trainingResult[3]);
 }
-int selectMode(){
+int selectMode()
+{
   char mode;
   printf("Welcome to this program. Please choose the mode you want to execute this program.\n");
   printf("Enter 1 to show quadratic loss of the training process.\n");
   printf("Enter 2 to enter custom string and show the XOR checksum based on NN learning output.\n");
-  scanf("%c",&mode);
-  return(mode - 48);
+  scanf("%c", &mode);
+  return (mode - 48);
 }
-void dlQuadraticLoss(int iteration,int lossReportSteps)
+void dlQuadraticLoss(int iteration, int lossReportSteps)
 {
-  genann *ann = genann_init( ANN_INPUT_NUM, ANN_HIDDEN_LAYERS, ANN_NEURONS_PER_LAYER, ANN_OUTPUT_NUM );
+  /* New network with 2 inputs, 1 hidden layer of 2 neurons, and 1 output. */
+  genann *ann = genann_init(ANN_INPUT_NUM, ANN_HIDDEN_LAYERS, ANN_NEURONS_PER_LAYER, ANN_OUTPUT_NUM);
   double quadraticLoss;
-
   /* Train on the four labeled data points many times. */
   for (int i = 0; i < iteration; ++i)
   {
@@ -176,14 +174,15 @@ void dlQuadraticLoss(int iteration,int lossReportSteps)
     genann_train(ann, sampleInput[1], sampleOutput + 1, 3);
     genann_train(ann, sampleInput[2], sampleOutput + 2, 3);
     genann_train(ann, sampleInput[3], sampleOutput + 3, 3);
-    
-     if(i % lossReportSteps == 0){
-      for(int j = 0; j < 4; j++ ){
-        quadraticLoss += pow((*genann_run(ann,sampleInput[j]) - *(sampleOutput + j)),2);
+    // calculates quadratic loss on specific interval.
+    if (i % lossReportSteps == 0)
+    {
+      for (int j = 0; j < 4; j++)
+      {
+        quadraticLoss += pow((*genann_run(ann, sampleInput[j]) - *(sampleOutput + j)), 2);
       }
-      printf("Quadratic loss for %d is %f\n",i, quadraticLoss);
+      printf("Quadratic loss for %d is %f\n", i, quadraticLoss);
     }
-    
   }
   genann_free(ann);
 }

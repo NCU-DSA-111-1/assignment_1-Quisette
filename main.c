@@ -23,7 +23,8 @@ int main()
     dlQuadraticLoss(iterationTime, lossReportInterval);
     break;
   case 2:
-    printf("Please enter the training iteration. (integer)");
+    printf("Please enter the training iteration. (integer)\n");
+    printf("The training result would be better if trained for 30000 times.\n");
     scanf("%d", &iterationTime);
 
     dlTrain(iterationTime);
