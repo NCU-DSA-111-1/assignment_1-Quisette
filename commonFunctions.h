@@ -6,7 +6,7 @@ void init();
 char* getInput();
 void generateAns(char* string);
 void getOutput(char *string);
-void dlTrain(int iteration , int lossReportSteps);
+void dlTrain(int iteration);
 void calloc2dArray(double **array, int row, int col);
 void getTrainAns(char *string);
 bool dlXor(char num1, char num2);

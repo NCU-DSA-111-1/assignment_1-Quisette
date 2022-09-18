@@ -15,6 +15,7 @@ double *sampleOutput;
 double **sampleInput;
 // char *string;
 double *trainingResult;
+char *outputBits;
 void init()
 {
   double *lookup;
@@ -52,14 +53,14 @@ char* getInput()
   // string = (char*)calloc(10, sizeof(char));
   printf("Please enter a string. This Program will output the XOR checksum of this string.");
   char *string;
-  string = (char *)malloc(10);
+  string = (char *)malloc(100);
   // char string ;
   scanf("%s", string);
   
   // string = fgets(string,sizeof(string),stdin);
   printf("\n%s\n", string);
   
-  getOutput(string);
+  // getOutput(string);
   return(string);
 
   // free(string);
@@ -79,11 +80,10 @@ void generateAns(char *string)
 }
 void getOutput(char *string)
 {
-  char *outputBits;
-  outputBits = (char*)calloc(strlen(string), sizeof(char));
+  outputBits = calloc(strlen(string)*8, sizeof(char));
   for (int i = 0; string[i] != 0; i++)
   {
-    for (int j = 7; j >= 0; j--)
+    for (int j = 0; j <7; j++)
     {
       outputBits[i * 8 + j] = ((string[i] & (1 << j)) >> j); // gets each bit of character
     }
@@ -100,7 +100,7 @@ void getOutput(char *string)
   getTrainAns(outputBits);
   free(outputBits);
 }
-void dlTrain(int iteration,int lossReportSteps)
+void dlTrain(int iteration)
 {
   genann *ann = genann_init( ANN_INPUT_NUM, ANN_HIDDEN_LAYERS, ANN_NEURONS_PER_LAYER, ANN_OUTPUT_NUM );
   double quadraticLoss;

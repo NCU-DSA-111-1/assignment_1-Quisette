@@ -11,16 +11,22 @@
 int main()
 {
   init();
-  char *inputString;
-  // inputString =  getInput();
-
+  int iterationTime, lossReportinterval;
+  
   switch (selectMode())
   {
   case 1:
-    dlQuadraticLoss(30000, 1000);
+    printf("Please enter the training iteration. (integer)");
+    scanf("%d", &iterationTime);
+    printf("Please enter the interval to report quadratic loss (integer)");
+    scanf("%d", &lossReportinterval);
+    dlQuadraticLoss(iterationTime, 1000);
     break;
   case 2:
-    dlTrain(30000, 1000);
+    printf("Please enter the training iteration. (integer)");
+    scanf("%d", &iterationTime);
+
+    dlTrain(iterationTime);
     getOutput(getInput());
     break;
   }
