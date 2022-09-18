@@ -12,8 +12,8 @@ threshold: all
 linear: CFLAGS += -Dgenann_act=genann_act_linear
 linear: all
 
-test: test.o genann.o
-main: main.o genann.o
+test: test.o genann.o commonFunctions.o
+main: main.o genann.o commonFunctions.o
 check: test
 	./$^
 
