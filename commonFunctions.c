@@ -10,6 +10,7 @@
 #define ANN_HIDDEN_LAYERS 1
 #define ANN_NEURONS_PER_LAYER 2
 #define ANN_OUTPUT_NUM 1
+#define ANN_LEARNING_RATE 0.1
 #define LOOKUP_SIZE 4096
 double *sampleOutput;
 double **sampleInput;
@@ -79,12 +80,12 @@ void getOutput(char *string)
   outputBits = calloc(strlen(string) * 8, sizeof(char));
   for (int i = 0; string[i] != 0; i++)
   {
-    for (int j = 0; j < 7; j++)
+    for (int j = 0; j < 8; j++)
     {
       outputBits[i * 8 + j] = ((string[i] & (1 << j)) >> j); // gets each bit of character
     }
   }
-  // displays bits of string
+  // displays bits of string (8 bits for a byte to store)
   for (int i = 0; i < strlen(string) * 8; i++)
   {
     printf("%d", outputBits[i]);
@@ -102,17 +103,19 @@ void dlTrain(int iteration)
   double quadraticLoss;
 
   /* Train on the four labeled data points many times. */
+
+  // 4 training results in total
   for (int i = 0; i < iteration; ++i)
   {
     quadraticLoss = 0;
-    genann_train(ann, sampleInput[0], sampleOutput + 0, 3);
-    genann_train(ann, sampleInput[1], sampleOutput + 1, 3);
-    genann_train(ann, sampleInput[2], sampleOutput + 2, 3);
-    genann_train(ann, sampleInput[3], sampleOutput + 3, 3);
+    genann_train(ann, sampleInput[0], sampleOutput + 0, ANN_LEARNING_RATE);
+    genann_train(ann, sampleInput[1], sampleOutput + 1, ANN_LEARNING_RATE);
+    genann_train(ann, sampleInput[2], sampleOutput + 2, ANN_LEARNING_RATE);
+    genann_train(ann, sampleInput[3], sampleOutput + 3, ANN_LEARNING_RATE);
   }
 
   /* Run the network and see what it predicts. */
-
+  // 4 training results in total
   trainingResult = (double *)calloc(4, sizeof(double));
   printf("Training Result: ");
   for (int i = 0; i < 4; i++)
@@ -127,7 +130,6 @@ void dlTrain(int iteration)
 
 void calloc2dArray(double **array, int row, int col)
 {
-  // array = calloc(row, sizeof(double*));
   for (int i = 0; i < row; i++)
   {
     sampleInput[i] = (double *)calloc(col, sizeof(*(array[i])));
@@ -139,10 +141,8 @@ void getTrainAns(char *string)
   for (int i = 0; i < (strlen(string)) * 8; i++)
   {
     xorChecksum = dlXor(xorChecksum, string[i]);
-    // printf("%d", string[i]);
-    // result  ^= string[i];
   }
-  printf("\n DL-Learning: %d", xorChecksum);
+  printf("\nDL-Learning xor checksum: %d", xorChecksum);
 }
 
 bool dlXor(char num1, char num2)
@@ -174,7 +174,7 @@ void dlQuadraticLoss(int iteration, int lossReportSteps)
     genann_train(ann, sampleInput[1], sampleOutput + 1, 3);
     genann_train(ann, sampleInput[2], sampleOutput + 2, 3);
     genann_train(ann, sampleInput[3], sampleOutput + 3, 3);
-    // calculates quadratic loss on specific interval.
+    // calculates quadratic loss on a specific interval given.
     if (i % lossReportSteps == 0)
     {
       for (int j = 0; j < 4; j++)
