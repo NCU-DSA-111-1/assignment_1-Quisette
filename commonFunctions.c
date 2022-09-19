@@ -7,8 +7,8 @@
 #include "genann.h"
 #include "commonFunctions.h"
 #define ANN_INPUT_NUM 2
-#define ANN_HIDDEN_LAYERS 1
-#define ANN_NEURONS_PER_LAYER 2
+#define ANN_HIDDEN_LAYERS 2
+#define ANN_NEURONS_PER_LAYER 4
 #define ANN_OUTPUT_NUM 1
 #define ANN_LEARNING_RATE 0.1
 #define LOOKUP_SIZE 4096
@@ -170,10 +170,10 @@ void dlQuadraticLoss(int iteration, int lossReportSteps)
   for (int i = 0; i < iteration; ++i)
   {
     quadraticLoss = 0;
-    genann_train(ann, sampleInput[0], sampleOutput + 0, 3);
-    genann_train(ann, sampleInput[1], sampleOutput + 1, 3);
-    genann_train(ann, sampleInput[2], sampleOutput + 2, 3);
-    genann_train(ann, sampleInput[3], sampleOutput + 3, 3);
+    genann_train(ann, sampleInput[0], sampleOutput + 0, ANN_LEARNING_RATE);
+    genann_train(ann, sampleInput[1], sampleOutput + 1, ANN_LEARNING_RATE);
+    genann_train(ann, sampleInput[2], sampleOutput + 2, ANN_LEARNING_RATE);
+    genann_train(ann, sampleInput[3], sampleOutput + 3, ANN_LEARNING_RATE);
     // calculates quadratic loss on a specific interval given.
     if (i % lossReportSteps == 0)
     {
