@@ -7,12 +7,16 @@
 #include "commonFunctions.h"
 #include <string.h>
 #define LOOKUP_SIZE 4096
-enum Modes{LossMode = 1, StringMode =2};
+enum Modes
+{
+  LossMode = 1,
+  StringMode = 2
+};
 int main()
 {
   init();
   int iterationTime, lossReportInterval;
-  
+
   switch (selectMode())
   {
   case LossMode:
@@ -25,7 +29,6 @@ int main()
   case StringMode:
     printf("Please enter the training iteration. (integer)\n");
     printf("The training result would be better if trained for 30000 times.\n");
-
 
     scanf("%d", &iterationTime);
     dlTrain(iterationTime);
