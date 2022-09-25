@@ -6,7 +6,9 @@
 #include <time.h>
 #include "genann.h"
 #include "commonFunctions.h"
+// displays bits of string (8 bits for a byte to store)
 // #define SHOW_BITS
+//shows raw result of each training period 
 // #define ANN_SHOW_EACH_RESULT
 #define ANN_INPUT_NUM 2
 #define ANN_HIDDEN_LAYERS 1
@@ -25,14 +27,13 @@ char *outputBits;
 void init()
 {
   double *lookup;
-  lookup = (double *)calloc(LOOKUP_SIZE, sizeof(double));
+  lookup = (double *)calloc(LOOKUP_SIZE, sizeof(double)); //allocates memory for NN engine.
   /* This will make the neural network initialize differently each run. */
   /* If you don't get a good result, try again for a different result. */
   srand(time(0));
 
   /* Input and expected out data for the XOR function. */
 
-  // allocate memories for sample inputs and outputs.
   sampleOutput = (double *)calloc(TRAIN_SETS, sizeof(double));
   sampleInput = (double **)calloc(TRAIN_SETS, sizeof(double *));
 
@@ -153,9 +154,11 @@ int selectMode()
 }
 void dlQuadraticLoss(int iteration, int lossReportSteps)
 {
-  /* New network with 2 inputs, 1 hidden layer of 2 neurons, and 1 output. */
+  /* New network with ANN_INPUT_NUM inputs, ANN_HIDDEN_LAYERS hidden layer of
+   ANN_NEURONS_PER_LAYER neurons,  and ANN_OUTPUT_NUM output. */
   genann *ann = genann_init(ANN_INPUT_NUM, ANN_HIDDEN_LAYERS, ANN_NEURONS_PER_LAYER, ANN_OUTPUT_NUM);
   double quadraticLoss = 0;
+    printf("Quadratic loss:\n (Iteration, Loss)\n");
   /* Train on the four labeled data points many times. */
   for (int i = 0; i < iteration; ++i)
   {
@@ -169,13 +172,13 @@ void dlQuadraticLoss(int iteration, int lossReportSteps)
       {
         quadraticLoss += pow((*genann_run(ann, sampleInput[j]) - *(sampleOutput + j)), 2);
       }
-      printf("Quadratic loss for %d is %f\n", i, quadraticLoss);
+      printf("%d,\t%f\n", i, quadraticLoss);
        for (int j = 0; j < TRAIN_SETS; j++)
       {
+        //shows raw result of each training period 
         #ifdef ANN_SHOW_EACH_RESULT
         printf("%f\n",*genann_run(ann,sampleInput[j]));
         #endif // ANN_SHOW_EACH_RESULT
-        quadraticLoss += pow((*genann_run(ann, sampleInput[j]) - *(sampleOutput + j)), 2);
       }
     }
   }
