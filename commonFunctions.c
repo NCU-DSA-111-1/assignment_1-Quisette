@@ -54,7 +54,7 @@ void init()
 }
 char *getInput()
 {
-	printf("Please enter a string. This Program will output the XOR checksum of this string.");
+	printf("Please enter a string. This Program will output the XOR checksum of this string.\n>>");
 	char *string;
 	string = (char *)malloc(MAX_CHAR_LEN);
 	scanf("%s", string);
@@ -148,7 +148,7 @@ int selectMode()
 	char mode;
 	printf("Welcome to this program. Please choose the mode you want to execute this program.\n");
 	printf("Enter 1 to show quadratic loss of the training process.\n");
-	printf("Enter 2 to enter custom string and show the XOR checksum based on NN learning output.\n");
+	printf("Enter 2 to enter custom string and show the XOR checksum based on NN learning output.\n>>");
 	scanf("%c", &mode);
 	return (mode - ZERO_ASCII);
 }
@@ -172,6 +172,7 @@ void dlQuadraticLoss(int iteration, int lossReportSteps)
 			{
 				quadraticLoss += pow((*genann_run(ann, sampleInput[j]) - *(sampleOutput + j)), 2);
 			}
+			quadraticLoss /= 4;
 			printf("%d,\t%f\n", i, quadraticLoss);
 			for (int j = 0; j < TRAIN_SETS; j++)
 			{
