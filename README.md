@@ -1,4 +1,5 @@
-# DSA Homework #1 XOR Operator Training Program Using Neural Network
+# DSA Homework #1 
+# XOR Operator Training Program Using Neural Network
 
 ## Compile 
 
