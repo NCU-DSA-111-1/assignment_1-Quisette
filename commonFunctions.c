@@ -107,7 +107,7 @@ void dlTrain(int iteration)
 	}
 
 	/* Run the network and see what it predicts. */
-	trainingResult = (double *)calloc(4, sizeof(double)); // stores the final training result
+	trainingResult = (double *)calloc(TRAIN_SETS, sizeof(double)); // stores the final training result
 	printf("Training Result: ");
 	for (int i = 0; i < TRAIN_SETS; i++)
 	{
@@ -172,7 +172,7 @@ void dlQuadraticLoss(int iteration, int lossReportSteps)
 			{
 				quadraticLoss += pow((*genann_run(ann, sampleInput[j]) - *(sampleOutput + j)), 2);
 			}
-			quadraticLoss /= 4;
+			quadraticLoss /= TRAIN_SETS;
 			printf("%d,\t%f\n", i, quadraticLoss);
 			for (int j = 0; j < TRAIN_SETS; j++)
 			{
