@@ -1,7 +1,7 @@
 #pragma once
 #ifndef COMMONFUNCTIONS_H
 #define COMMONFUNCTIONS_H
-//initialize neural network and variables.
+// initialize neural network and variables.
 void init();
 // mode selection and turn input string to number.
 int selectMode();
@@ -23,6 +23,5 @@ void calloc2dArray(double **array, int row, int col);
 
 // get the xor result based on learned result.
 bool nnXor(char num1, char num2);
-
 
 #endif // COMMONFUNCTIONS_H
