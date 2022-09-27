@@ -24,13 +24,13 @@ int main()
     scanf("%d", &iterationTime);
     printf("Please enter the interval to report quadratic loss (integer)\n>>");
     scanf("%d", &lossReportInterval);
-    dlQuadraticLoss(iterationTime, lossReportInterval);
+    nnQuadraticLoss(iterationTime, lossReportInterval);
     break;
   case StringMode:
     printf("Please enter the training iteration. (integer)\n");
     printf("The training result would be better if trained for 5000 times for 1 layer with 2 nodes per layer.\n>>");
     scanf("%d", &iterationTime);
-    dlTrain(iterationTime);
+    nnTrain(iterationTime);
     getOutput(getInput());
     break;
   }
