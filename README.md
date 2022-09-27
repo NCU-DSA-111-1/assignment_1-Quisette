@@ -1,5 +1,5 @@
 # DSA Homework #1 
-# XOR Operator Training Program Using Neural Network
+# Binary Parity Checksum Validatorwith XOR Operator Trained by Neural Network
 
 ## Compile 
 
