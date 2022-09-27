@@ -132,7 +132,7 @@ void nnTrain(int iteration)
 	genann_free(ann);
 }
 // Parse the string into the bit-by-bit string and calculates both correct and dl-learned results.
-void getOutput(char *string)
+void getBitString(char *string)
 {
 	outputBits = calloc(strlen(string) * BYTE_SIZE, sizeof(char));
 	for (int i = 0; string[i] != 0; i++)

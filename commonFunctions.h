@@ -12,7 +12,7 @@ void nnQuadraticLoss(int iteration, int lossReportSteps);
 // Trains xor output based on given iteration.
 void nnTrain(int iteration);
 // Parse the string into the bit-by-bit string and calculates both correct and dl-learned results.
-void getOutput(char *string);
+void getBitString(char *string);
 // Using logic xor operator to calculate the correct result for reference.
 void getRealAns(char *string);
 // get xor checksum based on xor function learned by neural network.

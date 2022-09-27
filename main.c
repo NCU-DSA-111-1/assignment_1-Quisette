@@ -31,7 +31,7 @@ int main()
     printf("The training result would be better if trained for 5000 times for 1 layer with 2 nodes per layer.\n>>");
     scanf("%d", &iterationTime);
     nnTrain(iterationTime);
-    getOutput(getInput());
+    getBitString(getInput());
     break;
   }
   return 0;
