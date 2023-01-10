@@ -1,0 +1,82 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+
+
+
+
+\title{A simple \LaTeX\ Tutorial and Note}
+\author{Quisette Chung}
+
+
+\input{./article.tex}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\chapter{Test Chapter}
+		\begin{Thm}{Test Theorem}{}
+			This is the content of The Test Theorem.
+		\end{Thm}
+		\begin{Lem}{Test Lemma}{}
+			This is the content of The Test Lemma.
+		\end{Lem}
+		\begin{Cor}{Test Corollary}{}
+			This is the content of The Test Corollary.
+		\end{Cor}
+		\begin{Def}{Test Definition}{}
+			This is the content of The Test Definition.
+		\end{Def}
+		\begin{Exp}{The Test Example}{}
+		 This is the content of The Test Example.
+		\end{Exp}
+	\section{Tables}
+		\begin{table}[H]
+			\caption{實驗C-2之原始數據}
+			\centering
+			\begin{tabular}[c]{ccccc}
+				
+				\textbf{滑車質量}& \textbf{外加砝碼} & \textbf{初速}& \textbf{末速} & \textbf{加速度}  \\
+				$m_1$ (g)  &  $m_2$ (g)&$v_i$ (cm/s) & $v_f$ (cm/s) & $a$ (cm/s$^2$)\\
+				\hline \\
+				233.0 & 10.0& 49.75&80.64 &  50.3\\							
+				223.0 & 20.0& 71.94&104.1 & 70.8 \\
+				213.0 & 30.0& 90.90& 131.5&  112.9 \\
+				203.0 & 40.0&100.0 &161.2 & 199.8 \\
+				193.0 & 50.0& 140.8&212.7 & 317.7 \\
+			\end{tabular}
+		\end{table}
+	
+	\section{Pictures}
+		\begin{figure}[H]
+			\centering 
+			\includegraphics[width=0.5\textwidth]{figure1.jpg}
+			\caption{滑車受外加砝碼牽引作用之系統示意圖\cite{ref1}}
+		\end{figure}
+	\section{Equations}
+	This is a sample Equation. We can reference like this one \ref{sampleeq} and this one \eqref{sampleeq}
+		\begin{equation}
+			\label{sampleeq}
+			1+2 = 3
+		\end{equation}
+		\begin{equation}
+			\frac{d}{dx}f(x) = x^2 +e^{i\pi}
+		\end{equation}
+	
+	
+	\begin{thebibliography}{99}  
+		
+		\bibitem{ref1}實驗二：運動軌跡與相關物理量測量，國立清華大學普通物理實驗室(http://www.phys.nthu.edu.tw/~gplab/exp002.html)
+		\bibitem{ref2}普通物理實驗講義，國立中央大學物理學系
+		%\bibitem{ref3}
+		%\bibitem{ref4}
+		%\bibitem{ref5}
+		
+	\end{thebibliography} 
+\end{document}
+	

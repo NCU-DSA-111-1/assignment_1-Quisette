@@ -1,0 +1,33 @@
+	\section{Techniques and Resources}
+	In this section, we want to introduce a useful concept called \emph{dynamic memory allocation}, and compare it with the known static memory allocation. We also mention the function library \emph{genann} to use, for its simplicity to include. 
+ 	\subsection{Dynamic Memory Allocation in C}
+	    \subsubsection{Difference of Static and Dynamic Memory Allocation }
+	    According to reference \cite{ref1}, the author has concluded the advantages and disadvantages of static memory allocation and dynamic memory allocation, shown below:
+	    \paragraph{Static Memory Allocation}
+	    \begin{itemize}
+	        \item Allocation of memory is done automatically by the compiler. This will reduce the execution time of the program.
+	        \item Uses stack data structures.
+	        \item Allocated memory (including variables and arrays) cannot be freed until the program terminates.
+	        \item Memory is allocated before the script executes.
+	        \item Simple usage and easy for new learners to use.
+	    \end{itemize}
+	    \paragraph{Dynamic Memory Allocation}
+	    \begin{itemize}
+	        \item Memory is allocated in runtime. Hence, the execution time will be increased.
+	        \item Uses heap data structures.
+	        \item Memory can be resized/freed by scripts, therefore lessening wasted memory in the program.
+	        \item Memory should be freed manually after use, or it could cause unknown problems to debug.  
+	        \item Needs better knowledge of memory allocation to prevent unknown errors.
+	        
+	    \end{itemize}
+	   
+	    \subsubsection{Usable Functions to Dynamically Allocate Memory}
+	    \begin{itemize}
+	        \item \lstinline{malloc()} allocates the dynamic memory without the initialization. 
+	        \item \lstinline{calloc()} allocates the dynamic memory with initialization to prevent accidentally accessing  corrupted memory. 
+	        \item \lstinline{realloc()} reallocates the existing memory to expand/shrink its memory size.
+	        \item \lstinline{free()} frees the memory and let it be recycled by the operating system.
+	    \end{itemize}
+	     
+	    \subsection{Function Libraries Used in This Program}
+	    In this program, we used an open-sourced neural network library Genann \cite{ref2}, with a small number of function library file to include and clear documentation for users to embed into their codes.    

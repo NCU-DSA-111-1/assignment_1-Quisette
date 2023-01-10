@@ -1,0 +1,36 @@
+\section{Theoretical Background of Neural Network}
+    In this section, we're going to introduce the definition of neural networks, and its implementations in C as a library.
+	\subsection{Neurons}
+	Neurons are the fundamental part of the neural network, and they simulate the real neuron from organisms. To turn neuron into a math model, Scientists has given the specific definition and functions of neurons.   
+	
+	\begin{figure}[h]
+	    \centering
+	\input{tikz_neuron}
+	    \caption{Model of Neuron \cite{ref4}}
+	    \label{fig:my_label}
+	\end{figure}
+	
+	Since the actual neuron in real life sends electric signals only if the inputs have reached  specific conditions, we modeled it to be the \emph{threshold} of the neuron to activate and send a signal to neurons in the next layer. \emph{Weight} is then applied to every input to adjust the importance of each input, and the neuron only activates if the total sum of every input multiplied by its weight is greater than the threshold. The mathematical function of a neuron is given below:
+	\begin{eqnarray}
+  \mbox{output} & = & \left\{ \begin{array}{ll}
+      0 & \mbox{if } \sum_j w_j x_j \leq \mbox{ threshold} \\
+      1 & \mbox{if } \sum_j w_j x_j > \mbox{ threshold}
+      \end{array} \right.
+      \label{percep}
+\end{eqnarray}
+	Equation \ref{percep} shows one type of neurons: the perceptrons. However, in the modern model of neural networks, we use Sigmoid functions or Softmax functions with other approximating techniques to evaluate neuron outputs to imporve the accuracy of the trained model.   
+	\subsection{Network of Neurons}
+	As figure \ref{fig:nn-graph} shows, each neuron of the same layer is connected to every node of the next layer, therefore the output of this model can be transformed into matrix form:\\
+	\paragraph{Matrixlization of Neuron Networks \cite{ref5}\\}
+	Let $x$ inputs be numbered $i_1, i_2, \cdots i_x$, then matrix \textbf{I} is the matrix storing $1\times x$ elements of inputs in the same layer. 
+	Each input neuron has its $y$ weights respectively points towards $y$ neurons of the next layer, then the total of input weight is represented by an $x\times y$ matrix \textbf{W}. Multiply \textbf{I} and \textbf{W} gets the inputs of the $y$  neuron in the next layer, stored in $ y\times 1$ matrix \textbf{H}. \\
+	The same method can be done repetitively until the output layer is reached. 
+
+ \begin{figure}[h!]
+     \centering
+    \input{tikz_neuron_net}
+     \caption{An Example of Neural Network}
+     \label{fig:nn-graph}
+ \end{figure}
+
+	

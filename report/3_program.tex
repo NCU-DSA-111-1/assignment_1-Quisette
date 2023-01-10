@@ -1,0 +1,68 @@
+	\section{Program}
+	This section contains the introduction of some parameters and self-defined functions to make users feel free reading source code. 
+	\subsection{Macro-Defined Constants}
+	\begin{table}[ht]
+	    \centering
+	    \begin{tabular}{|l|l|l|}
+	    \hline
+	        Name  &  Description & Default Value\\
+	         \hline
+    	     ANN\_INPUT\_NUM &  numbers of inputs in NN model &2\\ 
+    	     ANN\_HIDDEN\_LAYERS & numbers of hidden layers in NN  model &1\\ 
+    	     ANN\_NEURONS\_PER\_LAYER &  neurons per layer in NN model &2\\ 
+    	     ANN\_OUTPUT\_NUM & numbers of inputs in NN model &1\\ 
+    	     ANN\_LEARNING\_RATE & the learning rate of neural network &3\\ 
+    	     LOOKUP\_SIZE & temporary data storage for \textit{genann}  &4096\\ 
+    	     MAX\_CHAR\_LEN & maximum limit of user string input &100\\ 
+    	     ZERO\_ASCII & value of 0 in ASCII &48\\ 
+    	     TRAIN\_SETS & sets of neural network training
+    	     &4\\ 
+    	      \hline
+	    \end{tabular}
+	    \caption{Table of Macro-Defined Constants}
+	    \label{tab:my_label}
+	\end{table}
+	\subsection{Self-Defined Functions}
+	\paragraph{void init();\\}
+	This function initializes the space of the neural network's lookup size and array sample I/Os for later usage. 
+	\paragraph{int selectMode();\\}
+	This function asks the user to switch between functions by entering numbers corresponding to the functions by the instruction.
+	The function will return an integer representing the enumeration code of functions.   
+	\paragraph{char *getInput();\\}
+	This function works when the user is asked to enter a string to show its checksum. The function will return the address of the stored string.
+	\paragraph{void nnQuadraticLoss(int iteration, int lossReprtSteps);\\}
+	This function is used to train the model and display loss function (MSE) based on the given parameters:
+	\begin{itemize}
+	    \item \lstinline{int iteration} : the number of iteration times to train this model.
+	    \item \lstinline{int lossReportSteps} : the interval of generating a report (a line of output in console) of loss. 
+	\end{itemize}
+	For instance, if we use  \lstinline{nnQuadraticLoss(30000,1000);} , we will get  30000 times of model training and a report in every 1000 epochs.
+	\paragraph{void nnTrain(int iteration);\\}
+	This function trains the model without showing the loss function. 
+	\paragraph{void getBitString(char *string);\\}
+	This function generates a string of bits based on the  string user gives. The function will generate a string of bits and call the following function:
+	\begin{itemize}
+	    \item \textbf{void getRealAns(char *string);} prints the binary parity checksum based on the pre-built XOR operator on the standard library. 
+	    \item \textbf{void getTrainAns(char *string);} prints the binary parity checksum based on learned results.  
+	\end{itemize}
+	
+	
+	
+	\paragraph{void calloc2dArray(double **array, int row, int col);\\}
+	This function creates a 2-dimensional array based on the given parameters:
+	\begin{itemize}
+	    \item \lstinline{double **array} : the address of the 2-dimensional array.
+	    \item \lstinline{int row, int col} : the rows and columns of the array. 
+	\end{itemize}
+	\paragraph{bool nnXor(char num1, char num2);\\}
+	    This function takes two characters (only 0 and 1 are allowed) and maps the inputs to the corresponding outputs from learned results.
+
+	\subsection{Compile Parameters}
+	    Please open the project directory in command line and execute the following command:
+	    \begin{lstlisting}[language=Bash,caption=Compile Parameters]
+$ make main 
+$ ./main	     \end{lstlisting}
+	    \begin{lstlisting}[language=Bash,caption=Compile Results]
+cc -Wall -Wshadow -O3 -g -march=native   -c -o main.o main.c
+cc   main.o genann.o commonFunctions.o  -lm -o main	     \end{lstlisting}
+Note that the warnings from the compiler has been omitted for concise. 
